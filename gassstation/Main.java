@@ -68,6 +68,7 @@ class Main {
         break;
       }
     }
+    
     System.out.println("============================================");
     System.out.println("【本日の売上】");
     System.out.println("総客数　: " + customerCount + " 名");
