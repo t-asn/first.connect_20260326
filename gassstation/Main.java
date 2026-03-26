@@ -64,7 +64,7 @@ class Main {
 
       // 以下隠し画面
       if (shopStatus == 0000) {
-        System.out.println("本日の営業を終了します。売上を集計中...");
+        System.out.println("本日の営業を終了します。売上を集計中....");
         break;
       }
     }
