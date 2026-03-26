@@ -63,7 +63,7 @@ class Main {
       int shopStatus = sc.nextInt();
 
       // 以下隠し画面
-      if (shopStatus == 0000) {
+      if (shopStatus == 1234) {
         System.out.println("本日の営業を終了します。売上を集計中....");
         break;
       }
