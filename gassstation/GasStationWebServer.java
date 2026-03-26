@@ -56,75 +56,95 @@ public class GasStationWebServer {
 
     // --- 1. エネオス風メイン画面 (決済→油種→数量) ---
     private String getFormHtml() {
-      return "<html><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'>" +
-          "<style>" +
-          "  body { font-family: 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif; text-align: center; background: #f0f2f5; margin: 0; }" +
-          "  header { background: #e60012; color: white; padding: 15px; font-weight: bold; font-size: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }" +
-          "  .container { padding: 20px; max-width: 500px; margin: auto; }" +
-          "  .guide { background: #fffde7; border: 2px solid #fff176; padding: 15px; margin-bottom: 25px; font-weight: bold; font-size: 18px; border-radius: 10px; color: #333; }" +
-          "  .btn-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }" +
-          "  .btn { padding: 25px; border: none; border-radius: 15px; color: white; font-size: 24px; font-weight: bold; cursor: pointer; box-shadow: 0 6px 0 rgba(0,0,0,0.15); transition: 0.1s; width: 100%; }" +
-          "  .btn:active { transform: translateY(4px); box-shadow: 0 2px 0 rgba(0,0,0,0.15); }" +
-          "  .pay-btn { background: #546e7a; } .hi-oct { background: #e60012; } .reg { background: #ff7d00; } .dsl { background: #2e7d32; }" +
-          "  .next-btn { background: #1e88e5; margin-top: 20px; }" +
-          "  .num-input { width: 80%; font-size: 50px; text-align: center; border: 3px solid #ccc; border-radius: 10px; margin: 20px 0; padding: 10px; }" +
-          "  .step { display: none; } .active { display: block; }" +
-          "  .bar-bg { width: 100%; height: 40px; background: #eee; border-radius: 20px; overflow: hidden; border: 2px solid #ddd; }" +
-          "  .bar-fill { width: 0%; height: 100%; background: linear-gradient(90deg, #ff7d00, #e60012); }" +
-          "  .price { display: block; font-size: 16px; opacity: 0.9; }" +
-          "</style></head>" +
-          "<body>" +
-          "  <header>ASANOS セルフ給油システム</header>" +
-          "  <div class='container'>" +
-          "    <div class='guide' id='guide'>お支払い方法を選んでください</div>" +
-          "    " +
-          "    <div id='s1' class='step active btn-grid'>" +
-          "      <button class='btn pay-btn' onclick='go2(\"現金\")'>現 金</button>" +
-          "      <button class='btn pay-btn' onclick='go2(\"クレジットカード\")'>クレジットカード</button>" +
-          "      <button class='btn pay-btn' onclick='go2(\"プリペイド\")'>プリペイドカード</button>" +
-          "    </div>" +
-          "    " +
-          "    <div id='s2' class='step btn-grid'>" +
-          "      <button class='btn hi-oct' onclick='go3(\"HIGH_OCTANE\")'>ハイオク<span class='price'>￥" + GasType.HIGH_OCTANE.getPrice() + "</span></button>" +
-          "      <button class='btn reg' onclick='go3(\"REGULAR\")'>レギュラー<span class='price'>￥" + GasType.REGULAR.getPrice() + "</span></button>" +
-          "      <button class='btn dsl' onclick='go3(\"DIESEL\")'>軽油<span class='price'>￥" + GasType.DIESEL.getPrice() + "</span></button>" +
-          "    </div>" +
-          "    " +
-          "    <div id='s3' class='step'>" +
-          "      <h2 id='disp-t'></h2>" +
-          "      <input type='number' id='amt' class='num-input' value='20'> <span style='font-size:24px'>L</span><br>" +
-          "      <button class='btn next-btn' onclick='start()'>給油開始</button>" +
-          "    </div>" +
-          "    " +
-          "    <div id='s4' class='step'>" +
-          "      <h2>給油中...</h2>" +
-          "      <div class='bar-bg'><div id='bar' class='bar-fill'></div></div>" +
-          "      <p style='font-weight:bold; color:#e60012;'>満タン自動停止までお待ちください</p>" +
-          "    </div>" +
-          "  </div>" +
-          "  <script>" +
-          "    let d = { p: '', t: '', a: 0 };" +
-          "    function sw(o, n, m) {" +
-          "      document.getElementById(o).classList.remove('active');" +
-          "      document.getElementById(n).classList.add('active');" +
-          "      document.getElementById('guide').innerText = m;" +
-          "    }" +
-          "    function go2(p) { d.p = p; sw('s1', 's2', '油種を選んでください'); }" +
-          "    function go3(t) { " +
-          "      d.t = t; " +
-          "      document.getElementById('disp-t').innerText = (t=='HIGH_OCTANE'?'ハイオク':t=='REGULAR'?'レギュラー':'軽油') + ' 給油確認';" +
-          "      sw('s2', 's3', '数量を入力してください'); " +
-          "    }" +
-          "    function start() { " +
-          "      d.a = document.getElementById('amt').value;" +
-          "      sw('s3', 's4', 'ただいま給油中です');" +
-          "      let p = 0; const b = document.getElementById('bar');" +
-          "      const timer = setInterval(() => {" +
-          "        p += 2; b.style.width = p + '%';" +
-          "        if(p >= 100){ clearInterval(timer); location.href = '/result?type='+d.t+'&amount='+d.a+'&pay='+encodeURIComponent(d.p); }" +
-          "      }, 50);" +
-          "    }" +
-          "  </script></body></html>";
+      return
+          "<html><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'>"
+              +
+              "<style>" +
+              "  body { font-family: 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif; text-align: center; background: #f0f2f5; margin: 0; }"
+              +
+              "  header { background: #e60012; color: white; padding: 15px; font-weight: bold; font-size: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }"
+              +
+              "  .container { padding: 20px; max-width: 500px; margin: auto; }" +
+              "  .guide { background: #fffde7; border: 2px solid #fff176; padding: 15px; margin-bottom: 25px; font-weight: bold; font-size: 18px; border-radius: 10px; color: #333; }"
+              +
+              "  .btn-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }" +
+              "  .btn { padding: 25px; border: none; border-radius: 15px; color: white; font-size: 24px; font-weight: bold; cursor: pointer; box-shadow: 0 6px 0 rgba(0,0,0,0.15); transition: 0.1s; width: 100%; }"
+              +
+              "  .btn:active { transform: translateY(4px); box-shadow: 0 2px 0 rgba(0,0,0,0.15); }"
+              +
+              "  .pay-btn { background: #546e7a; } .hi-oct { background: #e60012; } .reg { background: #ff7d00; } .dsl { background: #2e7d32; }"
+              +
+              "  .next-btn { background: #1e88e5; margin-top: 20px; }" +
+              "  .num-input { width: 80%; font-size: 50px; text-align: center; border: 3px solid #ccc; border-radius: 10px; margin: 20px 0; padding: 10px; }"
+              +
+              "  .step { display: none; } .active { display: block; }" +
+              "  .bar-bg { width: 100%; height: 40px; background: #eee; border-radius: 20px; overflow: hidden; border: 2px solid #ddd; }"
+              +
+              "  .bar-fill { width: 0%; height: 100%; background: linear-gradient(90deg, #ff7d00, #e60012); }"
+              +
+              "  .price { display: block; font-size: 16px; opacity: 0.9; }" +
+              "</style></head>" +
+              "<body>" +
+              "  <header>ASANOS セルフ給油システム</header>" +
+              "  <div class='container'>" +
+              "    <div class='guide' id='guide'>お支払い方法を選んでください</div>" +
+              "    " +
+              "    <div id='s1' class='step active btn-grid'>" +
+              "      <button class='btn pay-btn' onclick='go2(\"現金\")'>現 金</button>" +
+              "      <button class='btn pay-btn' onclick='go2(\"クレジットカード\")'>クレジットカード</button>"
+              +
+              "      <button class='btn pay-btn' onclick='go2(\"プリペイド\")'>プリペイドカード</button>"
+              +
+              "    </div>" +
+              "    " +
+              "    <div id='s2' class='step btn-grid'>" +
+              "      <button class='btn hi-oct' onclick='go3(\"HIGH_OCTANE\")'>ハイオク<span class='price'>￥"
+              + GasType.HIGH_OCTANE.getPrice() + "</span></button>" +
+              "      <button class='btn reg' onclick='go3(\"REGULAR\")'>レギュラー<span class='price'>￥"
+              + GasType.REGULAR.getPrice() + "</span></button>" +
+              "      <button class='btn dsl' onclick='go3(\"DIESEL\")'>軽油<span class='price'>￥"
+              + GasType.DIESEL.getPrice() + "</span></button>" +
+              "    </div>" +
+              "    " +
+              "    <div id='s3' class='step'>" +
+              "      <h2 id='disp-t'></h2>" +
+              "      <input type='number' id='amt' class='num-input' value='20'> <span style='font-size:24px'>L</span><br>"
+              +
+              "      <button class='btn next-btn' onclick='start()'>給油開始</button>" +
+              "    </div>" +
+              "    " +
+              "    <div id='s4' class='step'>" +
+              "      <h2>給油中...</h2>" +
+              "      <div class='bar-bg'><div id='bar' class='bar-fill'></div></div>" +
+              "      <p style='font-weight:bold; color:#e60012;'>満タン自動停止までお待ちください</p>"
+              +
+              "    </div>" +
+              "  </div>" +
+              "  <script>" +
+              "    let d = { p: '', t: '', a: 0 };" +
+              "    function sw(o, n, m) {" +
+              "      document.getElementById(o).classList.remove('active');" +
+              "      document.getElementById(n).classList.add('active');" +
+              "      document.getElementById('guide').innerText = m;" +
+              "    }" +
+              "    function go2(p) { d.p = p; sw('s1', 's2', '油種を選んでください'); }" +
+              "    function go3(t) { " +
+              "      d.t = t; " +
+              "      document.getElementById('disp-t').innerText = (t=='HIGH_OCTANE'?'ハイオク':t=='REGULAR'?'レギュラー':'軽油') + ' 給油確認';"
+              +
+              "      sw('s2', 's3', '数量を入力してください'); " +
+              "    }" +
+              "    function start() { " +
+              "      d.a = document.getElementById('amt').value;" +
+              "      sw('s3', 's4', 'ただいま給油中です');" +
+              "      let p = 0; const b = document.getElementById('bar');" +
+              "      const timer = setInterval(() => {" +
+              "        p += 2; b.style.width = p + '%';" +
+              "        if(p >= 100){ clearInterval(timer); location.href = '/result?type='+d.t+'&amount='+d.a+'&pay='+encodeURIComponent(d.p); }"
+              +
+              "      }, 50);" +
+              "    }" +
+              "  </script></body></html>";
     }
 
     // --- 2. 蓄積処理 ＋ レシート表示 ---
